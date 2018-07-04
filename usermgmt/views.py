@@ -39,3 +39,31 @@ class GetUser(APIView):
         except:
             raise
 get_user = GetUser.as_view()
+
+
+# def post(self, request, *args, **kwargs):
+#     data = {}
+#     files = []
+#     try:
+#         for file in request.FILES.getlist('myfile'):
+#             customer_obj = CustomerUser.objects.get(email=request.user.email)
+#             domain_url = str(customer_obj.subdomain) + ".localhost"
+#             try:
+#                 obj = FaqKb.objects.get(issuecategory_id=request.POST['issue_id'])
+#                 file_path = "media/" + domain_url + "/" + str(obj.file_path)
+#                 if os.path.isfile(file_path):
+#                     os.remove(file_path)
+#             except:
+#                 obj = FaqKb()
+#             obj.issuecategory_id = request.POST['issue_id']
+#             obj.file_name = file
+#             obj.file_path = file
+#             obj.tenant_id_id = request.user.tenant_id_id
+#             obj.file_size = str(int(file.size) / 1024) + '/kb'
+#             obj.save()
+#             files.append(
+#                 {'name': str(obj.file_name), 'path': str(domain_url) + '/' + str(obj.file_path), 'id': str(obj.id)})
+#             data['files'] = files
+#     except:
+#         data.update(base_fail_message())
+#     return HttpResponse(json.dumps(data), content_type='application/json')

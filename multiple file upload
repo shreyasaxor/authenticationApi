@@ -1,0 +1,30 @@
+
+/multiple file upload/
+
+function saveknowledgefiles(that) {
+   var fd =  new FormData(that.find('form')[0]);
+
+    fd.append('issue_id', that.find('input[type="hidden"]').val());
+    $.ajax({
+        url: '/customer-knowledgebase/',
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-CSRFToken', csrftoken)
+        },
+
+        success: function(data) {
+        $.each( data.files, function( key, value ) {
+               $(that.find('h6')).empty();
+               $(that.append('<h6><a  onclick="window.open('+'\'/'+"media/"+value['path']+'\')">'+value['name']+'</a></h6>'))
+         });
+
+        },
+        error: function(error) {
+            console.log("Error", error);
+        }
+    });
+
+}
